@@ -15,7 +15,7 @@ export class JsonplaceholderService {
     this.urlRestApi = 'https://jsonplaceholder.typicode.com/todos';
   }
 
-  readTodoList(): Observable<ITodo[]> {
+  readTodoList():Observable<ITodo[]> {
     return this.httpc.get<ITodo[]>(
       `${this.urlRestApi}`,
       {
