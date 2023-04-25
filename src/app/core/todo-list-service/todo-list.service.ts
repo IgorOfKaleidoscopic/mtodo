@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 
 import { ITodo } from 'src/app/shared/interfaces/itodo';
-import { TodoItem } from 'src/app/shared/models/todo-item';
+import { TodoItem } from 'src/app/shared/models/Todo';
 
 @Injectable({
   providedIn: 'root'

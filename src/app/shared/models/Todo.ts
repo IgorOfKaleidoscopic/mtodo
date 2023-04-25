@@ -1,6 +1,6 @@
 import { ITodo } from 'src/app/shared/interfaces/itodo';
 
-export class TodoItem implements ITodo {
+export class Todo implements ITodo {
   userId: number;
   id: number;
   title: string;

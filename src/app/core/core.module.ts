@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 
-import { JsonplaceholderService } from './jsonplaceholder/jsonplaceholder.service';
+import { JsonplaceholderService } from './json-placeholder-service/json-placeholder.service';
 
 @NgModule({
   declarations: [],
