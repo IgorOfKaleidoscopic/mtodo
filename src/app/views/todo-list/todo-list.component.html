@@ -1,3 +1,11 @@
+<div>
+  <section>
+    <mat-form-field appearance="fill" class="token">
+      <input matInput type="text" placeholder="Create new todo..." [(ngModel)]="newTodoTitle" (keyup)="handleKeyUp($event)">
+    </mat-form-field>
+  </section>
+</div>
+
 <div class='container'>
   <div class='child'>
     <div>
