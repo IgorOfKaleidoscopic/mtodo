@@ -2,4 +2,12 @@
     <span>{{ title }}</span>
 </div>
 
+<div *ngIf="loading">
+  loading...
+</div>
+
+<div *ngIf="error">
+  <strong>Warning!</strong> {{error}}
+</div>
+
 <router-outlet></router-outlet>

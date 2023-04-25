@@ -1,13 +1,13 @@
 import { NgModule } from '@angular/core';
 
-import { JsonplaceholderService } from './json-placeholder-service/json-placeholder.service';
+import { TodoListService } from './todo-list-service/todo-list.service';
 
 @NgModule({
   declarations: [],
   imports: [
   ],
   providers: [
-    JsonplaceholderService
+    TodoListService
   ]
 })
 export class CoreModule { }
