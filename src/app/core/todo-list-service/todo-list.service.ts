@@ -1,34 +1,58 @@
 import { Injectable } from '@angular/core';
 
-import { ITodo } from 'src/app/shared/interfaces/itodo';
-import { TodoItem } from 'src/app/shared/models/Todo';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
+import { Observable, pipe, map, filter, throwError, catchError } from 'rxjs';
+
+import { ITodo } from 'src/app/shared/interfaces/ITodo';
+import { Todo } from 'src/app/shared/models/Todo';
 
 @Injectable({
   providedIn: 'root'
 })
 export class TodoListService {
+  urlRestApi: string;
   todoList:ITodo[] = [];
 
-  constructor() { }
+  constructor(private httpc: HttpClient) {
+    this.urlRestApi = 'https://jsonplaceholder.typicode.com/todos';
+  }
+
+  readWebService():Observable<ITodo[]> {
+    return this.httpc.get<ITodo[]>(
+      `${this.urlRestApi}`,
+      {
+        headers: {
+        },
+        params: {
+        }
+      }
+      ).pipe();
+  }
 
   get():ITodo[] {
     return this.todoList;
   }
 
-  clear():void {
-    this.todoList.splice(0);
+  append(title:string):void {
+    this.todoList.push(new Todo (900, this.todoList.length, title, false));
   }
 
-  appendObject(item:ITodo):void {
-    this.todoList.push(item);
+  readLocalStorage():void {
+    this.todoList.forEach( (todo:ITodo) => {
+      if (localStorage.getItem('mto#' + todo.id.toString()) == 'c') {
+        todo.completed = true;
+      }
+      else {
+        todo.completed = false;
+      }
+    });
   }
 
-  appendByTitle(title:string):void {
-    this.todoList.push(new TodoItem (900, this.todoList.length, title, false));
-  }
+  rewriteLocalStorage():void {
+    localStorage.clear();
 
-  change(id:number, state:boolean):void {
-    this.todoList[id].completed = state;
+    this.todoList.forEach( (todo:ITodo) => {
+      localStorage.setItem('mto#'+todo.id.toString(), todo.completed?'c':'a');
+    });
   }
-
 }

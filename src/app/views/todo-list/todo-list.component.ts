@@ -3,7 +3,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 
 import { Router } from '@angular/router';
 
-import { ITodo } from 'src/app/shared/interfaces/itodo';
+import { ITodo } from 'src/app/shared/interfaces/ITodo';
 import { TodoListService } from 'src/app/core/todo-list-service/todo-list.service';
 
 @Component({
@@ -15,16 +15,19 @@ export class TodoListComponent {
   newTodoTitle:string = '';
   todoList:ITodo[] = [];
 
-  constructor(private tdl:TodoListService, private snackBar: MatSnackBar, private router:Router) { }
+  constructor(private tlservice:TodoListService, private snackBar: MatSnackBar, private router:Router) {
+    this.todoList = this.tlservice.get();
+  }
 
   ngOnInit():void {
-    this.todoList = this.tdl.get();
+
   }
 
  onKeyUp(e:any){
     if (e.keyCode === 13) {
       if (this.newTodoTitle.trim().length > 0) {
-        this.tdl.appendByTitle(this.newTodoTitle);
+        this.tlservice.append(this.newTodoTitle);
+        this.tlservice.rewriteLocalStorage();
 
         this.router.navigate([this.router.url]);
       }
@@ -35,6 +38,8 @@ export class TodoListComponent {
   }
 
   onModelChanged(e:any) {
+    this.tlservice.rewriteLocalStorage();
+
     this.router.navigate([this.router.url]);
   }
 }

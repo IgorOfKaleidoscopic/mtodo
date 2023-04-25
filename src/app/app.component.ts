@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 import { Subscription } from 'rxjs';
 
-import { ITodo } from 'src/app/shared/interfaces/itodo';
-import { JsonplaceholderService } from 'src/app/core/json-placeholder-service/json-placeholder.service';
+import { TodoListService } from './core/todo-list-service/todo-list.service';
 
 @Component({
   selector: 'app-root',
@@ -13,33 +13,32 @@ import { JsonplaceholderService } from 'src/app/core/json-placeholder-service/js
 export class AppComponent {
   title = 'TODO App';
   subscr$: Subscription = Subscription.EMPTY;
-  loading: boolean = false;
-  errorMsg: string = '';
-  todoList: ITodo[] = [];
+  loading: boolean = true;
+  error: string = '';
 
-  constructor(private jph:JsonplaceholderService) {
+  constructor(private tlservice:TodoListService, private router:Router) {
   }
 
-  ngOnInit():void {
-    this.loading = true;
-
-    this.subscr$ = this.jph.readTodoList().subscribe({
+  ngAfterViewInit():void {
+    this.subscr$ = this.tlservice.readWebService().subscribe({
       next: (data) => {
         console.info("Stream chunk");
         console.log(data);
 
-        this.todoList = data;
+        this.tlservice.todoList = this.tlservice.todoList.concat(data);
       },
       error: (err) => {
         console.error(err);
 
-        this.errorMsg = err;
+        this.error = err;
         this.loading = false;
       },
       complete: () => {
         console.info('Stream complete');
 
         this.loading = false;
+
+        this.router.navigateByUrl('/tl');
       }
     });
   }

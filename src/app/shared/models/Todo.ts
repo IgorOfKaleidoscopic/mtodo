@@ -1,4 +1,4 @@
-import { ITodo } from 'src/app/shared/interfaces/itodo';
+import { ITodo } from 'src/app/shared/interfaces/ITodo';
 
 export class Todo implements ITodo {
   userId: number;
