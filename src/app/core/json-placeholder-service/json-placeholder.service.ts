@@ -8,7 +8,7 @@ import { ITodo } from 'src/app/shared/interfaces/itodo';
 @Injectable({
   providedIn: 'root'
 })
-export class JsonplaceholderService {
+export class JsonPlaceholderService {
   urlRestApi: string;
 
   constructor(private httpc: HttpClient) {

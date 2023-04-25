@@ -4,7 +4,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 
 import { ITodo } from 'src/app/shared/interfaces/itodo';
-import { TodoListService } from 'src/app/core/data/todo-list.service';
+import { TodoListService } from 'src/app/core/todo-list-service/todo-list.service';
 
 @Component({
   selector: 'app-todo-list',

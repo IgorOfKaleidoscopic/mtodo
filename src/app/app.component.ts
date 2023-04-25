@@ -3,7 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
 
 import { ITodo } from 'src/app/shared/interfaces/itodo';
-import { JsonplaceholderService } from 'src/app/core/jsonplaceholder/jsonplaceholder.service';
+import { JsonplaceholderService } from 'src/app/core/json-placeholder-service/json-placeholder.service';
 
 @Component({
   selector: 'app-root',
