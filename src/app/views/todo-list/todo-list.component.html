@@ -1,7 +1,7 @@
 <div>
   <section>
     <mat-form-field appearance="fill" class="token">
-      <input matInput type="text" placeholder="Create new todo..." [(ngModel)]="newTodoTitle" (keyup)="handleKeyUp($event)">
+      <input matInput type="text" placeholder="Create new todo..." [(ngModel)]="newTodoTitle" (keyup)="onKeyUp($event)">
     </mat-form-field>
   </section>
 </div>
@@ -16,7 +16,9 @@
       <table>
         <tbody>
           <tr *ngFor="let todo of todoList">
-            <td *ngIf="todo.completed == false">{{todo.title}}</td>
+            <ng-container *ngIf="todo.completed == false">
+              <td><mat-checkbox [(ngModel)]="todo.completed" (ngModelChange)="onModelChanged($event)">{{todo.title}}</mat-checkbox></td>
+            </ng-container>
           </tr>
         </tbody>
       </table>
@@ -32,7 +34,9 @@
       <table>
         <tbody>
           <tr *ngFor="let todo of todoList">
-            <td *ngIf="todo.completed == true">{{todo.title}}</td>
+            <ng-container *ngIf="todo.completed == true">
+              <td><mat-checkbox [(ngModel)]="todo.completed" (ngModelChange)="onModelChanged($event)">{{todo.title}}</mat-checkbox></td>
+            </ng-container>
           </tr>
         </tbody>
       </table>
